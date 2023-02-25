@@ -1,0 +1,38 @@
+{
+  "name": "linkedin-skill-assessment-passing-robot",
+  "version": "1.0.0",
+  "description": "Robot that automates passing skill assessments on LinkedIn, helping users improve their job readiness.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelfaj/linkedin-skill-assessment-passing-robot.git"
+  },
+  "keywords": [
+    "LinkedIn",
+    "skill",
+    "assessments",
+    "automation",
+    "job",
+    "readiness",
+    "robot",
+    "programming",
+    "open-source",
+    "node",
+    "javascript"
+  ],
+  "author": "Samuel Fajreldines",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samuelfaj/linkedin-skill-assessment-passing-robot/issues"
+  },
+  "homepage": "https://github.com/samuelfaj/linkedin-skill-assessment-passing-robot#readme",
+  "dependencies": {
+    "chatgpt": "^4.7.2",
+    "colors": "^1.4.0",
+    "puppeteer": "^19.7.2"
+  }
+}
