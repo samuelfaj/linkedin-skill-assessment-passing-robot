@@ -55,16 +55,26 @@ export default class ChatGpt {
 
 	async question(){
 		const self = this;
-		const title = await self.getText(self.page, `.visually-hidden`, await self.page.$(`#assessment-a11y-title`));
+		let title = await self.getText(self.page, `.visually-hidden`, await self.page.$(`#assessment-a11y-title`));
 
 		if(!title){
 			return false;
 		}
 
+		const detail = await self.page.$('.sa-assessment-quiz__title-detail');
+		if(detail){
+			let code = await self.getText(self.page, `.visually-hidden`, detail);
+
+			if(code){
+				title += `\n\n\`\`\`${code}\`\`\``
+			}
+		}
+
+
 		const options = {};
 
 		let formattedOptions = [];
-		
+
 		for(let i=0;i<10;i++){
 			const div = await self.page.$(`#skill-assessment-quiz-${i}`);
 
@@ -79,14 +89,15 @@ export default class ChatGpt {
 				: await self.getText(self.page, `.visually-hidden`, div);
 
 			options[i] = text;
-			formattedOptions.push(`${i} - ${text}`)
+			formattedOptions.push(`${i} - \`\`\`${text}\`\`\``)
 		}
 
 		const chatGptQuestion =
-			`Please reply only with the number of right awsner:\n\n` +
 			`${title}\n\n` +
+			`Answers: \n` +
 			`${formattedOptions.join(`\n`)}` +
 			`\n\n` +
+			`Reply with only the number of the right answer and nothing more.\n` +
 			`Example of what you need to reply: 2`
 
 		console.log({
@@ -96,7 +107,7 @@ export default class ChatGpt {
 
 		console.log(chatGptQuestion);
 
-		const reply = (await self.chatGpt.sendMessage(chatGptQuestion) || '').replace(/[^0-9]/g, '').substr(0, 1);
+		const reply = (await self.chatGpt.sendMessage(chatGptQuestion) || '').replace(/[^0-9]/g, '').substr(0,1);
 		console.log(reply);
 
 
