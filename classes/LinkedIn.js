@@ -96,7 +96,7 @@ export default class ChatGpt {
 
 		console.log(chatGptQuestion);
 
-		const reply = (await self.chatGpt.sendMessage(chatGptQuestion) || '').replace(/[^0-9]/g, '');
+		const reply = (await self.chatGpt.sendMessage(chatGptQuestion) || '').replace(/[^0-9]/g, '').substr(0, 1);
 		console.log(reply);
 
 
